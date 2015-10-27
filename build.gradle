@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+        classpath 'org.robovm:robovm-gradle-plugin:1.5.0'
+        
+        classpath 'net.onedaybeard.artemis:artemis-odb-gradle-plugin:0.11.4'
+    }
+}
+
+allprojects {
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+
+    version = '1.0'
+    ext {
+        appName = "Capism"
+        gdxVersion = '1.7.0'
+        roboVMVersion = '1.8.0'
+        box2DLightsVersion = '1.4'
+        ashleyVersion = '1.6.0'
+        aiVersion = '1.6.0'
+        artemisVersion = '0.11.4' // edit version artemis-odb-gradle-plugin, see buildscript.dependencies.classpath above.
+        artemisContribVersion = "0.11.4"
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    }
+}
+
+project(":desktop") {
+    apply plugin: "java"
+
+
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    }
+}
+
+project(":html") {
+    apply plugin: "gwt"
+    apply plugin: "war"
+
+
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+        
+         compile "net.onedaybeard.artemis:artemis-odb-gwt:$artemisVersion"
+        compile "net.onedaybeard.artemis:artemis-odb-gwt:$artemisVersion:sources"
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion:sources"
+
+        // Artemis-odb bonus functionality (systems, events, components).
+        compile "net.mostlyoriginal.artemis-odb:contrib-core:$artemisContribVersion:sources"
+        compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion:sources"
+        compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion:sources"
+    }
+}
+
+project(":core") {
+    apply plugin: "java"
+
+ 	configurations {
+        provided
+    }
+
+    sourceSets {
+        // run the annotation processor compile time.
+        main { compileClasspath += [configurations.provided] }
+    }
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        
+        // Artemis-odb
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion:sources"
+        // Artemis-odb annotation processor (see https://github.com/junkdog/artemis-odb/wiki/EntityFactory)
+        provided "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
+
+        // Artemis-odb bonus functionality (systems, events, components).
+        compile "net.mostlyoriginal.artemis-odb:contrib-core:$artemisContribVersion"
+        compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion"
+        compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion"
+    }
+}
+
+tasks.eclipse.doLast {
+    delete ".project"
+}
