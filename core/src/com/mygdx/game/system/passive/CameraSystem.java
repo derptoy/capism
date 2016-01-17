@@ -13,7 +13,7 @@ public class CameraSystem extends BaseSystem {
 
     public CameraSystem() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth() * ZOOM, Gdx.graphics.getHeight() * ZOOM);
-        camera.setToOrtho(true, Gdx.graphics.getWidth() * ZOOM, Gdx.graphics.getHeight() * ZOOM);
+        camera.setToOrtho(false, Gdx.graphics.getWidth() * ZOOM, Gdx.graphics.getHeight() * ZOOM);
         camera.update();
 
         guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * ZOOM, Gdx.graphics.getHeight() * ZOOM);

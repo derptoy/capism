@@ -7,6 +7,7 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.component.Dir;
 import com.mygdx.game.component.Position;
 import com.mygdx.game.component.Tex;
 import com.mygdx.game.system.passive.AssetSystem;
@@ -21,6 +22,7 @@ public class TextureSystem extends EntityProcessingSystem {
 	private AssetSystem assetSystem;
 	private ComponentMapper<Position> positionMapper;
 	private ComponentMapper<Tex> textureMapper;
+	private ComponentMapper<Dir> dirMapper;
 	
 //	private ShapeRenderer shaperRenderer;
 
@@ -45,17 +47,12 @@ public class TextureSystem extends EntityProcessingSystem {
 		Position position = positionMapper.get(e);
 		Tex tex = textureMapper.get(e);
 		
-		if(tex.rotation > 0 && tex.rotation < 90)
-			tex.flip = false;
-		else if(tex.rotation > 270 && tex.rotation <= 360)
-			tex.flip = false;
-		else
-			tex.flip = true;
+		float angle = processFlip(e,tex);
 		
 		Texture texture = assetSystem.getTexture(tex.texture);
 		batch.setProjectionMatrix(cameraSystem.camera.combined);
 		batch.begin();
-		batch.draw(texture, position.x - texture.getWidth()/2, position.y - texture.getHeight()/2,10,16,texture.getWidth(),texture.getHeight(),1,1,tex.rotation,0,0,texture.getWidth(),texture.getHeight(),false,tex.flip);
+		batch.draw(texture, position.x - texture.getWidth()/2, position.y - texture.getHeight()/2,texture.getWidth()/2,texture.getHeight()/2,texture.getWidth(),texture.getHeight(),1,1,angle,0,0,texture.getWidth(),texture.getHeight(),false,tex.flip);
 		batch.end();
 		
 //		shaperRenderer.setColor(Color.BLUE);
@@ -64,6 +61,23 @@ public class TextureSystem extends EntityProcessingSystem {
 //		shaperRenderer.end();
 		
 		
+	}
+
+	private float processFlip(Entity e, Tex tex) {
+		Dir dir = dirMapper.get(e);
+		
+		float angle = 0;
+		if(dir != null) {
+			angle = dir.direction.angle();
+			if(angle > 0 && angle < 90)
+				tex.flip = false;
+			else if(angle > 270 && angle <= 360)
+				tex.flip = false;
+			else
+				tex.flip = true;
+		}
+		
+		return angle;
 	}
 
 }

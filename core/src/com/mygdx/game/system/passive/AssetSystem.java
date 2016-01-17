@@ -4,12 +4,11 @@ import java.util.HashMap;
 
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 @Wire
@@ -18,14 +17,20 @@ public class AssetSystem extends BaseSystem {
 	private HashMap<String, Texture> textures = new HashMap<String, Texture>();
 	private HashMap<String, Animation> animations = new HashMap<String, Animation>();
 	private HashMap<String, Sound> sounds = new HashMap<String, Sound>();
+	private BitmapFont font;
 	
 	@Override
 	protected void initialize() {
 		prepareTextures();
 		prepareAnimations();
 		prepareSound();
+		prepareFonts();
 	}
 	
+	private void prepareFonts() {
+		font = new BitmapFont();
+	}
+
 	private void prepareSound() {
 //		sounds.put("door1",Gdx.audio.newSound(Gdx.files.internal("sound/electric_door_opening_1.wav")));
 //		sounds.put("door2",Gdx.audio.newSound(Gdx.files.internal("sound/electric_door_opening_2.wav")));
@@ -45,6 +50,9 @@ public class AssetSystem extends BaseSystem {
 
 	private void prepareTextures() {
 		textures.put("test", new Texture("badlogic.jpg"));
+		Texture tr = new Texture("truck2.png");
+		tr.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		textures.put("truck", tr);
 //		textures.put("gem", new Texture("gem/jewel.png"));
 //		textures.put("selection", new Texture("gem/selection.png"));
 		
@@ -121,6 +129,10 @@ public class AssetSystem extends BaseSystem {
 	
 	public Texture getTexture(String id) {
 		return textures.get(id);
+	}
+	
+	public BitmapFont getDefaultFont() {
+		return font;
 	}
 
 }
