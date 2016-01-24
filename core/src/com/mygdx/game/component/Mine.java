@@ -1,6 +1,7 @@
 package com.mygdx.game.component;
 
 import com.artemis.Component;
+import com.artemis.Entity;
 
 public class Mine extends Component {
 	public int outputs;
@@ -8,9 +9,12 @@ public class Mine extends Component {
 	public int amount;
 	public long lastAction;
 	
-	public Mine(int outputs, int amount, int tick) {
+	public Entity ParkingSpace;
+	
+	public Mine(int outputs, int amount, int tick, Entity parkingSpace) {
 		this.outputs = outputs;
 		this.amount = amount;
 		this.tick = tick;
+		ParkingSpace = parkingSpace;
 	}
 }

@@ -1,7 +1,5 @@
 package com.mygdx.game.system.logic;
 
-import java.util.LinkedList;
-
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -12,9 +10,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.component.Dir;
 import com.mygdx.game.component.Driver;
-import com.mygdx.game.component.Parked;
+import com.mygdx.game.component.Parking;
 import com.mygdx.game.component.Position;
-import com.mygdx.game.component.Tex;
 import com.mygdx.game.component.Waypoint;
 import com.mygdx.game.system.passive.Astar;
 
@@ -72,7 +69,7 @@ public class DriverLogic extends EntityProcessingSystem {
 				Entity poll = driver.path.poll();
 				// we arrived at destination
 				if(poll == null && driver.target != null) {
-					e.edit().add(new Parked(driver.target));
+					e.edit().add(new Parking(driver.target));
 				}
 				driver.target = poll;
 			}

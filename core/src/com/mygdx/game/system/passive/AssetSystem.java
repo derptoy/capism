@@ -49,16 +49,16 @@ public class AssetSystem extends BaseSystem {
 	}
 
 	private void prepareTextures() {
-		textures.put("test", new Texture("badlogic.jpg"));
-		Texture tr = new Texture("truck2.png");
+		loadTexture("truck2.png","truck");
+		loadTexture("factory.png","factory");
+		loadTexture("mine.png","mine");
+		loadTexture("parkingSpace.png","factoryParking");
+	}
+
+	private void loadTexture(String url, String name) {
+		Texture tr = new Texture(url);
 		tr.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		textures.put("truck", tr);
-//		textures.put("gem", new Texture("gem/jewel.png"));
-//		textures.put("selection", new Texture("gem/selection.png"));
-		
-//		textures.put("background", new Texture("map/background.png"));
-//		textures.put("gun", new Texture("gun/gun.png"));
-//		textures.put("bullet", new Texture("gun/bullet.png"));
+		textures.put(name, tr);
 	}
 
 	private void prepareAnimations() {

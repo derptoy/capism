@@ -52,7 +52,9 @@ public class TextureSystem extends EntityProcessingSystem {
 		Texture texture = assetSystem.getTexture(tex.texture);
 		batch.setProjectionMatrix(cameraSystem.camera.combined);
 		batch.begin();
-		batch.draw(texture, position.x - texture.getWidth()/2, position.y - texture.getHeight()/2,texture.getWidth()/2,texture.getHeight()/2,texture.getWidth(),texture.getHeight(),1,1,angle,0,0,texture.getWidth(),texture.getHeight(),false,tex.flip);
+		float x = tex.offsetX + position.x - texture.getWidth()/2;
+		float y = tex.offsetY + position.y - texture.getHeight()/2;
+		batch.draw(texture, x, y,texture.getWidth()/2,texture.getHeight()/2,texture.getWidth(),texture.getHeight(),1,1,angle,0,0,texture.getWidth(),texture.getHeight(),false,tex.flip);
 		batch.end();
 		
 //		shaperRenderer.setColor(Color.BLUE);

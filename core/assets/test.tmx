@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="streetj" tilewidth="32" tileheight="32">
+  <image source="street.png" width="160" height="128"/>
+ </tileset>
+ <tileset firstgid="21" name="parking" tilewidth="32" tileheight="32">
+  <image source="parking.png" width="128" height="64"/>
+ </tileset>
+ <layer name="background" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztlosKgzAMRYPoHiJ76Ta2/f9/LmUthoJpsjUdSAOXFqIevE1CAeaYhNqjOq8+8awmpPzWr1fUDXUvzG/8+kA9Ua9M/ODrBnVC7WD2uSO5LZOj7/VKfvDVaWD+SZprlfzg6xTtl/xP5Rolf4SPdymPJTm3Pyv51Lsc/g9KPj1/uo91gOXej79hwed6/xe+tP643i9Rf5LZsOb6k+as6q8EP8f80/JDX7vaucB384++d1TyuX6T1l8sC35qNq2dz83/Enwnyd3Pki+5+1ny/3n+VvwaNWqUjTeHSyHX
+  </data>
+ </layer>
+ <layer name="foreground" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAADwbhAAAAE=
+  </data>
+ </layer>
+</map>
