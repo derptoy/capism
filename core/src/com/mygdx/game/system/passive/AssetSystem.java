@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetSystem extends BaseSystem {
 
 	private HashMap<String, Texture> textures = new HashMap<String, Texture>();
+	private HashMap<String, TextureRegion> textureRegion = new HashMap<String, TextureRegion>();
 	private HashMap<String, Animation> animations = new HashMap<String, Animation>();
 	private HashMap<String, Sound> sounds = new HashMap<String, Sound>();
 	private BitmapFont font;
@@ -53,6 +54,14 @@ public class AssetSystem extends BaseSystem {
 		loadTexture("factory.png","factory");
 		loadTexture("mine.png","mine");
 		loadTexture("parkingSpace.png","factoryParking");
+		loadTexture("street.png","street");
+		
+		loadTextureRegion("street","test",32*6,32*1,32,32);
+	}
+
+	private void loadTextureRegion(String fromTexture, String name, int x, int y, int width, int height) {
+		Texture texture = textures.get(fromTexture);
+		textureRegion.put(name, new TextureRegion(texture, x, y, width, height));
 	}
 
 	private void loadTexture(String url, String name) {
@@ -133,6 +142,10 @@ public class AssetSystem extends BaseSystem {
 	
 	public BitmapFont getDefaultFont() {
 		return font;
+	}
+	
+	public TextureRegion getTextureRegion(String id) {
+		return textureRegion.get(id);
 	}
 
 }

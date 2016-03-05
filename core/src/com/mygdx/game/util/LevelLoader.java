@@ -48,11 +48,14 @@ public class LevelLoader {
 			MapPoint point2 = new MapPoint(id++,23, 0);
 			MapPoint point3 = new MapPoint(id++,31, 7);
 			MapPoint point4 = new MapPoint(id++,31, 23);
+			MapPoint point5 = new MapPoint(id++,12, 18);
 			
 			point2.getNextList().add(point3.getId());
-			point4.getNextList().add(point1.getId());
+			point4.getNextList().add(point5.getId());
+			point5.getNextList().add(point1.getId());
 			
 			MapCells mc = new MapCells(MapTile.TURN_BOT_RIGHT);
+			mc.getInnerPoints().add(point5);
 			mc.setBotInput(point2);
 			mc.setBotOutput(point1);
 			mc.setRightInput(point4);
@@ -63,11 +66,14 @@ public class LevelLoader {
 			MapPoint point2 = new MapPoint(id++,23, 0);
 			MapPoint point3 = new MapPoint(id++,0, 7);
 			MapPoint point4 = new MapPoint(id++,0, 23);
+			MapPoint point5 = new MapPoint(id++,18, 18);
 			
-			point2.getNextList().add(point4.getId());
+			point2.getNextList().add(point5.getId());
+			point5.getNextList().add(point4.getId());
 			point3.getNextList().add(point1.getId());
 			
 			MapCells mc = new MapCells(MapTile.TURN_BOT_LEFT);
+			mc.getInnerPoints().add(point5);
 			mc.setBotInput(point2);
 			mc.setBotOutput(point1);
 			mc.setLeftInput(point3);
@@ -78,11 +84,14 @@ public class LevelLoader {
 			MapPoint point2 = new MapPoint(id++,23, 31);
 			MapPoint point3 = new MapPoint(id++,31, 7);
 			MapPoint point4 = new MapPoint(id++,31, 23);
+			MapPoint point5 = new MapPoint(id++,12, 12);
 			
-			point1.getNextList().add(point3.getId());
+			point1.getNextList().add(point5.getId());
+			point5.getNextList().add(point3.getId());
 			point4.getNextList().add(point2.getId());
 			
 			MapCells mc = new MapCells(MapTile.TURN_TOP_RIGHT);
+			mc.getInnerPoints().add(point5);
 			mc.setTopInput(point1);
 			mc.setTopOutput(point2);
 			mc.setRightInput(point4);
@@ -93,11 +102,14 @@ public class LevelLoader {
 			MapPoint point2 = new MapPoint(id++,23, 31);
 			MapPoint point3 = new MapPoint(id++,0, 7);
 			MapPoint point4 = new MapPoint(id++,0, 23);
+			MapPoint point5 = new MapPoint(id++,18, 12);
 			
 			point1.getNextList().add(point4.getId());
-			point3.getNextList().add(point2.getId());
+			point3.getNextList().add(point5.getId());
+			point5.getNextList().add(point2.getId());
 			
-			MapCells mc = new MapCells(MapTile.TURN_TOP_RIGHT);
+			MapCells mc = new MapCells(MapTile.TURN_TOP_LEFT);
+			mc.getInnerPoints().add(point5);
 			mc.setTopInput(point1);
 			mc.setTopOutput(point2);
 			mc.setLeftInput(point3);
@@ -168,7 +180,79 @@ public class LevelLoader {
 				point7.getNextList().add(point5.getId());
 			if(point7 != null && point2 != null)
 				point7.getNextList().add(point2.getId());
-		} 
+		} else if(cellId == MapTile.PARK_BOT.getId()) {
+			MapPoint point1 = new MapPoint(id++,23, 16);
+			MapPoint point2 = new MapPoint(id++,7, 16);
+			MapPoint point3 = new MapPoint(id++,23, 0);
+			MapPoint point4 = new MapPoint(id++,7, 0);
+			point1.setActivator(true);
+			point2.setExit(true);
+			
+			point3.getNextList().add(point1.getId());
+			point2.getNextList().add(point4.getId());
+			point1.getNextList().add(point2.getId());
+			
+			MapCells mc = new MapCells(MapTile.PARK_BOT);
+			mc.getInnerPoints().add(point1);
+			mc.getInnerPoints().add(point2);
+			mc.setBotInput(point3);
+			mc.setBotOutput(point4);
+			mapCells[i][j] = mc;
+		} else if(cellId == MapTile.PARK_TOP.getId()) {
+			MapPoint point1 = new MapPoint(id++,23, 16);
+			MapPoint point2 = new MapPoint(id++,7, 16);
+			MapPoint point3 = new MapPoint(id++,23, 31);
+			MapPoint point4 = new MapPoint(id++,7, 31);
+			point2.setActivator(true);
+			point1.setExit(true);
+			
+			point1.getNextList().add(point3.getId());
+			point4.getNextList().add(point2.getId());
+			point2.getNextList().add(point1.getId());
+			
+			MapCells mc = new MapCells(MapTile.PARK_TOP);
+			mc.getInnerPoints().add(point1);
+			mc.getInnerPoints().add(point2);
+			mc.setTopInput(point4);
+			mc.setTopOutput(point3);
+			mapCells[i][j] = mc;
+		} else if(cellId == MapTile.PARK_LEFT.getId()) {
+			MapPoint point1 = new MapPoint(id++,16, 23);
+			MapPoint point2 = new MapPoint(id++,16, 7);
+			MapPoint point3 = new MapPoint(id++,0, 23);
+			MapPoint point4 = new MapPoint(id++,0, 7);
+			point2.setActivator(true);
+			point1.setExit(true);
+			
+			point1.getNextList().add(point3.getId());
+			point4.getNextList().add(point2.getId());
+			point2.getNextList().add(point1.getId());
+			
+			MapCells mc = new MapCells(MapTile.PARK_LEFT);
+			mc.getInnerPoints().add(point1);
+			mc.getInnerPoints().add(point2);
+			mc.setLeftInput(point4);
+			mc.setLeftOutput(point3);
+			mapCells[i][j] = mc;
+		} else if(cellId == MapTile.PARK_RIGHT.getId()) {
+			MapPoint point1 = new MapPoint(id++,16, 23);
+			MapPoint point2 = new MapPoint(id++,16, 7);
+			MapPoint point3 = new MapPoint(id++,31, 23);
+			MapPoint point4 = new MapPoint(id++,31, 7);
+			point1.setActivator(true);
+			point2.setExit(true);
+			
+			point3.getNextList().add(point1.getId());
+			point2.getNextList().add(point4.getId());
+			point1.getNextList().add(point2.getId());
+			
+			MapCells mc = new MapCells(MapTile.PARK_RIGHT);
+			mc.getInnerPoints().add(point1);
+			mc.getInnerPoints().add(point2);
+			mc.setRightInput(point3);
+			mc.setRightOutput(point4);
+			mapCells[i][j] = mc;
+		}
 	}
 
 	private MapTile getTileType(int cellId) {

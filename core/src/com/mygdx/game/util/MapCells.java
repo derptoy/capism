@@ -1,5 +1,8 @@
 package com.mygdx.game.util;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MapCells {
 	private MapTile type;
 	
@@ -14,6 +17,8 @@ public class MapCells {
 	
 	private MapPoint rightInput;
 	private MapPoint rightOutput;
+	
+	private List<MapPoint> innerPoints = new LinkedList<>();
 
 	public MapCells(MapTile type) {
 		this.type = type;
@@ -86,7 +91,9 @@ public class MapCells {
 	public void setRightOutput(MapPoint rightOutput) {
 		this.rightOutput = rightOutput;
 	}
-	
-	
+
+	public List<MapPoint> getInnerPoints() {
+		return innerPoints;
+	}
 
 }

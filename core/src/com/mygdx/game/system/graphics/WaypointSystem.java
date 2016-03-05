@@ -7,6 +7,8 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.component.Position;
@@ -20,10 +22,14 @@ public class WaypointSystem extends EntityProcessingSystem {
 	private ComponentMapper<Waypoint> waypointMapper;
 	private ShapeRenderer shapeRenderer;
 	private CameraSystem cameraSystem;
+	private SpriteBatch batch;
+	private BitmapFont font;
 	
 	public WaypointSystem() {
 		super(Aspect.all(Position.class, Waypoint.class));
 		shapeRenderer = new ShapeRenderer();
+		font = new BitmapFont();
+		batch = new SpriteBatch();
 	}
 	
 	@Override
@@ -55,6 +61,12 @@ public class WaypointSystem extends EntityProcessingSystem {
 		}
 		shapeRenderer.end();
 		shapeRenderer.setColor(Color.WHITE);
+		
+		batch.setProjectionMatrix(cameraSystem.camera.combined.cpy().scl(0.5f));
+		batch.begin();
+		font.setColor(Color.RED);
+	    font.draw(batch, ""+waypoint.id, 2*position.x+15, 2*position.y+15);
+	    batch.end();
 	}
 
 }

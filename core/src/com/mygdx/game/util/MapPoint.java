@@ -7,6 +7,8 @@ public class MapPoint {
 	private int id;
 	private int x;
 	private int y;
+	private boolean activator;
+	private boolean exit;
 	
 	private List<Integer> nextList = new LinkedList<>();
 	
@@ -30,6 +32,22 @@ public class MapPoint {
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isActivator() {
+		return activator;
+	}
+
+	public void setActivator(boolean activator) {
+		this.activator = activator;
+	}
+
+	public boolean isExit() {
+		return exit;
+	}
+
+	public void setExit(boolean exit) {
+		this.exit = exit;
 	}
 	
 	
