@@ -43,14 +43,16 @@ public class ParkingSystem extends EntityProcessingSystem {
 		}
 		
 		ParkingSpace parkingSpace = parkingSpaceMapper.get(parking.target);
-		for(int i=0;i<parkingSpace.taken.length;i++) {
-			if(!parkingSpace.taken[i]) {
-//				parkingSpace.taken[i] = true;
-				direction.direction.set(-1, 0);
-				pos.x += parkingSpace.positions[i].getX();
-				pos.y += parkingSpace.positions[i].getY();
-				
-				break;
+		if(parkingSpace != null) {
+			for(int i=0;i<parkingSpace.taken.length;i++) {
+				if(!parkingSpace.taken[i]) {
+					//				parkingSpace.taken[i] = true;
+					direction.direction.set(-1, 0);
+					pos.x += parkingSpace.positions[i].getX();
+					pos.y += parkingSpace.positions[i].getY();
+
+					break;
+				}
 			}
 		}
 			

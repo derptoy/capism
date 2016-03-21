@@ -1,5 +1,7 @@
 package com.mygdx.game.util;
 
+import java.util.HashMap;
+
 public enum MapTile {
 	VERTICAL(4),
 	HORIZONTAL(5),
@@ -16,12 +18,24 @@ public enum MapTile {
 	CROSSROAD_MIDDLE_RIGHT(50),
 	CROSSROAD_MIDDLE_BOT(51),
 	CROSSROAD_MIDDLE_LEFT(52),
+	EMPTY(53),
 	PARK_BOT(23),
 	PARK_RIGHT(26),
 	PARK_LEFT(27),
 	PARK_TOP(39);
 	
 	private int id;
+	private static HashMap<Integer, MapTile> idMap = new HashMap<>();
+	
+	static {
+		for(MapTile tile : values()) {
+			idMap.put(tile.id, tile);
+		}
+	}
+	
+	public static MapTile getTileForId(int id) {
+		return idMap.get(id);
+	}
 
 	private MapTile(int id) {
 		this.id = id;

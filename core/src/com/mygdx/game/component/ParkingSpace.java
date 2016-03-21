@@ -6,7 +6,6 @@ import java.util.List;
 import com.artemis.Component;
 import com.artemis.Entity;
 import com.mygdx.game.data.Offset;
-import com.mygdx.game.util.MapPoint;
 
 public class ParkingSpace extends Component {
 	public Offset[] positions;

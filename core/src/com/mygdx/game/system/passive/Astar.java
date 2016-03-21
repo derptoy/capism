@@ -11,7 +11,7 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.component.Position;
-import com.mygdx.game.component.Waypoint;
+import com.mygdx.game.component.map.Waypoint;
 import com.mygdx.game.util.PathHelper;
 
 @Wire

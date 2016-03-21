@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.component.Position;
-import com.mygdx.game.component.Waypoint;
+import com.mygdx.game.component.map.Waypoint;
 import com.mygdx.game.system.passive.CameraSystem;
 
 @Wire
@@ -57,7 +57,8 @@ public class WaypointSystem extends EntityProcessingSystem {
 			
 				shapeRenderer.setColor(Color.WHITE);
 			
-			shapeRenderer.line(position.x, position.y, pos.x, pos.y);
+				if(pos != null)
+					shapeRenderer.line(position.x, position.y, pos.x, pos.y);
 		}
 		shapeRenderer.end();
 		shapeRenderer.setColor(Color.WHITE);
@@ -65,7 +66,7 @@ public class WaypointSystem extends EntityProcessingSystem {
 		batch.setProjectionMatrix(cameraSystem.camera.combined.cpy().scl(0.5f));
 		batch.begin();
 		font.setColor(Color.RED);
-	    font.draw(batch, ""+waypoint.id, 2*position.x+15, 2*position.y+15);
+	    font.draw(batch, ""+e.id, 2*position.x+15, 2*position.y+15);
 	    batch.end();
 	}
 

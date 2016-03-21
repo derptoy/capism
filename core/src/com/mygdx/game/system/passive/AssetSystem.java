@@ -4,12 +4,17 @@ import java.util.HashMap;
 
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.mygdx.game.util.MapTile;
 
 @Wire
 public class AssetSystem extends BaseSystem {
@@ -55,6 +60,7 @@ public class AssetSystem extends BaseSystem {
 		loadTexture("mine.png","mine");
 		loadTexture("parkingSpace.png","factoryParking");
 		loadTexture("street.png","street");
+		loadTexture("mouse.png","mouse");
 		
 		loadTextureRegion("street","test",32*6,32*1,32,32);
 	}
@@ -146,6 +152,20 @@ public class AssetSystem extends BaseSystem {
 	
 	public TextureRegion getTextureRegion(String id) {
 		return textureRegion.get(id);
+	}
+
+	public void loadMapTexures(TiledMapTileLayer background) {
+		for(int i=0;i<background.getWidth();i++) {
+			for (int j = 0; j < background.getHeight(); j++) {
+				Cell cell = background.getCell(i, j);
+				TiledMapTile tile = cell.getTile();
+				if(tile != null) {
+					MapTile mapTile = MapTile.getTileForId(tile.getId());
+					if(mapTile != null)
+						textureRegion.put(mapTile.toString(), tile.getTextureRegion());
+				}
+			}
+		}
 	}
 
 }

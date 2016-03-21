@@ -1,12 +1,13 @@
-package com.mygdx.game.data;
+package com.mygdx.game.component.map;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import com.artemis.Component;
 import com.artemis.Entity;
 import com.mygdx.game.util.MapTile;
 
-public class RoadTile {
+public class RoadTile extends Component {
 	
 	private MapTile type;
 	
@@ -24,6 +25,9 @@ public class RoadTile {
 	
 	private List<Entity> innerPoints = new LinkedList<>();
 	
+	private Entity activator;
+	private Entity exit;
+
 	public RoadTile(MapTile maptile) {
 		type = maptile;
 	}
@@ -103,5 +107,21 @@ public class RoadTile {
 	public void setInnerPoints(List<Entity> innerPoints) {
 		this.innerPoints = innerPoints;
 	}
-	
+
+	public Entity getActivator() {
+		return activator;
+	}
+
+	public void setActivator(Entity activator) {
+		this.activator = activator;
+	}
+
+	public Entity getExit() {
+		return exit;
+	}
+
+	public void setExit(Entity exit) {
+		this.exit = exit;
+	}
+
 }
